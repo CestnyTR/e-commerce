@@ -1,0 +1,82 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
+  <a class="navbar-brand" href="/index">CestnyTR</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+  <div class="collapse navbar-collapse" id="navbarsExample09">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/index">Anasayfa <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/about">Hakkımızda</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/sss">S.S.S</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ürünlerimiz</a>
+        <div class="dropdown-menu" aria-labelledby="dropdown09">
+          <a class="dropdown-item" href="/product/products">Tüm Ürünler</a>
+          <a class="dropdown-item" href="/product/products?category=Telefon">Telefon</a>
+          <a class="dropdown-item" href="/product/products?category=Monitör">Monitör</a>
+          <a class="dropdown-item" href="/product/products?category=Laptop">Laptop</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      {% if session.logged_in %}
+        <li class="nav-item">
+          {% if request.path != '/shopping_carts' %}
+            <a class="nav-link" href="/shopping_carts" id="cart-link">Sepet</a>
+            <div id="cart-popup" style="display: none; position: absolute; background-color: white; border: 1px solid #ccc; padding: 10px; z-index: 1000;">
+              {% if navbar_shopping_carts %}
+                <p>Sepetinizde {{ navbar_shopping_carts|length }} ürün var.</p>
+                <ul>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Ürün Adı</th>
+                        <th>Fiyat</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for item in navbar_shopping_carts %}
+                        <tr>
+                          <td>{{ item.title }}</td>
+                          <td>{{ item.price }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </ul>
+              {% else %}
+                <p>Sepetiniz boş.</p>
+              {% endif %}
+              <a href="/shopping_carts">Sepete Git</a>
+            </div>
+          {% endif %}
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Profil</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown09">
+            <a class="nav-link" href="/user_update">Kullanıcı bilgileri</a>
+            <a class="nav-link" href="/user_address">Adres bilgileri</a>
+            <a class="nav-link" href="/profile">Profil</a>
+            <a class="nav-link" href="/logout">Çıkış yap</a>
+          </div>
+        </li>
+      {% else %}
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Giriş yap</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Kayıt ol</a>
+        </li>
+      {% endif %}
+    </ul>
+    <form class="form-inline my-2 my-md-0">
+      <input class="form-control" type="text" placeholder="Search" aria-label="Search" />
+    </form>
+  </div>
+</nav>

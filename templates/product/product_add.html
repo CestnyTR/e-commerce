@@ -1,0 +1,31 @@
+{% extends 'body.html' %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/products_add.css') }}" />
+{% endblock %}
+
+{% block content %}
+  <h1>Ürün Ekle</h1>
+  {% from 'includes/_formhelpers.html' import render_field %}
+  <center>
+    <form method="post" enctype="multipart/form-data">
+      <dl>{{ render_field(form.title, class='form-control') }}
+        {{ render_field(form.category, class='form-control') }}
+        {{ render_field(form.stock, class='form-control') }}
+        {{ render_field(form.active, class='form-control') }}
+        {{ render_field(form.content, class='form-control') }}
+        {{ render_field(form.color, class='form-control') }}
+        {{ render_field(form.price, class='form-control') }}
+        {{ render_field(form.pictures, class='form-control', accept='.jpg,.jpeg,.png', multiple=true) }}</dl>
+
+      <div id="image-preview"></div>
+      <p>
+        <button type="submit" class="btn btn-primary">Ürünü Ekle</button>
+      </p>
+    </form>
+  </center>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/add_to_cart.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/products_add.js') }}"></script>
+{% endblock %}

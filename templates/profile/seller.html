@@ -1,0 +1,39 @@
+{% block content %}
+  <center>
+    <h1>Kontrol paneli</h1>
+  </center>
+
+  <h3>HOŞ GELDİNİZ {{ session.username }}</h3>
+  <table class="table table-striped table-light">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Ürün Adı</th>
+        <th scope="col">Ürünü Görüntüle</th>
+        <th scope="col">Ürün Stok Adedi</th>
+        <th scope="col">Güncelle</th>
+        <th scope="col">sil</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+        <tr>
+          <th scope="row">{{ product.id }}</th>
+          <td>{{ product.title }}</td>
+          <td>
+            <a href="/product/products/{{ product.id }}" class="btn btn-dark" role="button">Ürünü Görüntüle</a>
+          </td>
+          <td>{{ product.stock }}</td>
+          <td>
+            <a href="/product/product_update/{{ product.id }}" class="btn btn-info" role="button">Güncelle</a>
+          </td>
+          <td>
+            <a href="/product/product_delete/{{ product.id }}" class="btn btn-warning" role="button">Sil</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <a href="/product/product_add" class="btn btn-info" role="button">Ürün Ekle</a>
+{% endblock %}

@@ -1,0 +1,83 @@
+.address-list-container {
+    display: flex;
+    /* Flexbox kullanarak yan yana sıralama */
+    flex-wrap: wrap;
+    /* Gerekirse alt satıra geç */
+    padding: 10px;
+    font-family: sans-serif;
+}
+
+.address-item {
+    border: 1px solid #eee;
+    margin: 5px;
+    /* Öğeler arasında boşluk bırak */
+    padding: 5px;
+    cursor: pointer;
+    width: 200px;
+    /* veya istediğiniz genişlik */
+}
+
+.address-item:hover {
+    background-color: #f0f0f0;
+}
+
+.address-item.selected {
+    background-color: #e0e0e0;
+}
+
+
+
+.table-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 80%;
+    /* veya istediğiniz genişlik */
+    max-width: 800px;
+}
+
+.table-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Daha hafif gölge */
+    width: 90%;
+    /* Daha küçük genişlik */
+    max-width: 500px;
+    /* Maksimum genişlik */
+}
+
+table {
+    font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
+
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 12px 15px;
+    /* Daha küçük dolgu */
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+    /* Daha küçük yazı boyutu */
+}
+
+th {
+    background-color: #f0f0f0;
+    /* Açık gri başlık arka planı */
+    color: #333;
+    font-weight: 600;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+    /* Daha hafif hover efekti */
+}
+
+td:last-child {
+    font-weight: 600;
+    color: #333;
+}

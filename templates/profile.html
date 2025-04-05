@@ -1,0 +1,16 @@
+{% extends 'body.html' %}
+{% block content %}
+  {% if session.member_type == 'admin' %}
+    {% include 'profile/admin.html' %}
+  {% elif session.member_type == 'buyer' %}
+    {% include 'profile/buyer.html' %}
+  {% elif session.member_type == 'seller' %}
+    {% include 'profile/seller.html' %}
+  {% else %}
+  <h1>hmmm</h1>
+  <h1>ok</h1>
+  <h1>peki</h1>
+  <h1>tmm</h1>
+  <h1>sen bilirsin.</h1>
+  {% endif %}
+{% endblock %}

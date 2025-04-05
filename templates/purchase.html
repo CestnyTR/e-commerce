@@ -1,0 +1,67 @@
+{% extends 'body.html' %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/purchase.css') }}" />
+{% endblock %}
+
+{% block content %}
+  <center>
+    <h1>shopping carts</h1>
+  </center>
+
+  <h1>{{ user }}</h1>
+  <div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="text-decoration:none; color: grey;">Adresleriniz</a></h4>
+      </div>
+      <div id="collapse1" class="panel-collapse collapse in">
+        <div class="panel-body">
+          <div class="address-list-container">
+            {% for address_list in address_lists %}
+              <div class="address-item">
+                <div class="address-title">Adres: {{ address_list.title }}</div>
+                <div class="address-name">{{ address_list.name }}</div>
+                <div class="address-open">Açık Adres: {{ address_list.open_address }}</div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="panel-heading">
+        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse2" style="text-decoration:none; color: grey;">Ürünleriniz</a></h4>
+      </div>
+      <div id="collapse2" class="panel-collapse collapse in">
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Ürün</th>
+                <th scope="col">Adet</th>
+                <th scope="col">Fiyat</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for shopping_cart in shopping_carts %}
+                <tr>
+                  <td>{{ shopping_cart.title }}</td>
+                  <td>{{ shopping_cart.quantity }}</td>
+                  <td>{{ shopping_cart.item_total }}₺</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+            <tr>
+              <td colspan="2" >Fiyat</td>
+              <td>{{ total_price }}₺</td>
+            </tr>
+          </table>
+        </div>
+        <div class="panel-body"></div>
+      </div>
+    </div>
+  </div>
+  <a href="/payment" class="btn btn-info" role="button">Ödeme ekranına geç</a>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/purchase.js') }}"></script>
+{% endblock %}

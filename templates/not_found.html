@@ -1,0 +1,20 @@
+{% extends 'body.html' %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/not_found.css') }}" />
+{% endblock %}
+{% block content %}
+<div class="error-container">
+    <div class="lottie-animation"></div>
+    <div class="error-content">
+      <h1>404</h1>
+      <p>Oops! Sayfa bulunamadı.</p>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
+<script src="{{ url_for('static', filename='js/not_found.js') }}"></script>
+{% endblock %}

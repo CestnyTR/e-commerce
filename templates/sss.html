@@ -1,0 +1,72 @@
+{% extends 'body.html' %}
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/sss.css') }}" />
+{% endblock %}
+
+{% block content %}
+<section class="faq-section py-5">
+  <div class="container">
+      <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+      <div class="row">
+          <div class="col-lg-8 mx-auto">
+              <div class="accordion" id="faqAccordion">
+                  <!-- FAQ Item 1 -->
+                  <div class="card mb-3">
+                      <div class="card-header" id="headingOne">
+                          <h5 class="mb-0">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                What services do you offer?
+              </button>
+                          </h5>
+                      </div>
+                      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                          data-parent="#faqAccordion">
+                          <div class="card-body">
+                              We offer a wide range of services including web design, development, SEO, and digital
+                              marketing. Our team of experts is dedicated to helping your business grow online.
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- FAQ Item 2 -->
+                  <div class="card mb-3">
+                      <div class="card-header" id="headingTwo">
+                          <h5 class="mb-0">
+                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                How long does a typical project take?
+              </button>
+                          </h5>
+                      </div>
+                      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+                          <div class="card-body">
+                              Project timelines vary depending on the scope and complexity. A simple website might
+                              take 2-4 weeks, while a more complex web application could take several months. We'll
+                              provide a detailed timeline during our initial consultation.
+                          </div>
+                      </div>
+                  </div>
+
+                  <!-- FAQ Item 3 -->
+                  <div class="card mb-3">
+                      <div class="card-header" id="headingThree">
+                          <h5 class="mb-0">
+                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                What is your pricing structure?
+              </button>
+                          </h5>
+                      </div>
+                      <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                          data-parent="#faqAccordion">
+                          <div class="card-body">
+                              We offer flexible pricing options including project-based quotes and monthly retainers.
+                              Each solution is tailored to meet the unique needs of our clients. Contact us for a
+                              personalized quote.
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+{% endblock %}

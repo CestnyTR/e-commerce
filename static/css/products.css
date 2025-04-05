@@ -1,0 +1,19 @@
+.card-img-top {
+    object-fit: cover;
+    /* Resimleri orantılı olarak sığdırır */
+    height: 250px;
+    /* Sabit yükseklik, istediğiniz değeri ayarlayın */
+}
+
+.product_link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product_link:hover {
+    text-decoration-line: none;
+    text-decoration: none;
+    color: inherit;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}

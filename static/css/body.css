@@ -1,0 +1,29 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    /* background: url('/static/images/bg.png') 0.2% rgba(255, 255, 255, 0.1); */
+    background-color: whitesmoke;
+    background-blend-mode: multiply;
+    /* Karışım modu */
+
+
+}
+
+.container {
+    flex: 1;
+}
+
+footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 3rem 0;
+}
+
+.social-icons a {
+    font-size: 1.25rem;
+}

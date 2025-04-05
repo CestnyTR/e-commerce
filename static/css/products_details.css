@@ -1,0 +1,58 @@
+.image-gallery {
+    display: flex;
+    overflow-x: auto; /* Yatay kaydırma */
+    white-space: nowrap; /* Resimlerin alt satıra geçmesini engelle */
+    padding: 10px 0; /* Kaydırma alanına üst ve alt boşluk ekleyelim */
+}
+
+.image-gallery .col-3 {
+    flex: 0 0 auto; /* Esnekliği kapat ve genişliği otomatik ayarla */
+    width: 25%; /* Her resim için %25 genişlik */
+    padding: 0 5px; /* Resimler arası boşluk */
+}
+
+.image-gallery img {
+    width: 100%; /* Resimleri konteyner genişliğine sığdır */
+    height: auto; /* Yüksekliği orantılı ayarla */
+    object-fit: cover; /* Resimleri kırp ve orantılı sığdır */
+    aspect-ratio: 1/1; /* Resimleri kare yap */
+}
+/* Chrome, Safari ve Opera için özelleştirme */
+.image-gallery::-webkit-scrollbar {
+    height: 8px; /* Yatay kaydırma çubuğunun yüksekliği */
+}
+
+.image-gallery::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Arka plan rengi */
+    border-radius: 10px;
+}
+
+.image-gallery::-webkit-scrollbar-thumb {
+    background-color: #888; /* Kaydırma çubuğunun rengi */
+    border-radius: 10px; /* Köşe yuvarlama */
+    border: 2px solid #f1f1f1; /* Kaydırma çubuğunun etrafında bir sınır */
+}
+
+.image-gallery::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Üzerine gelindiğinde renk değişimi */
+}
+/* Firefox için özelleştirme */
+.image-gallery {
+    scrollbar-width: thin; /* Kaydırma çubuğu ince olacak şekilde ayarlanır */
+    scrollbar-color: #888 #f1f1f1; /* Kaydırma çubuğunun rengi ve arka planı */
+}
+.main-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    aspect-ratio: 1/1;
+}
+
+.card-image-container {
+    position: relative;
+}
+
+.card-image-container img {
+    transition: opacity 0.3s ease;
+}
+

@@ -1,0 +1,19 @@
+.cart-item img {
+    max-width: 100px;
+    height: auto;
+}
+
+.quantity-input {
+    width: 50px;
+}
+
+.cart-summary {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+.fixed-size-img {
+    width: 150px; /* Sabit genişlik */
+    height: 150px; /* Sabit yükseklik */
+    object-fit: cover; /* Oranı bozmadan resmi kırpar */
+    border-radius: 10px; /* Köşeleri yuvarlat */
+}

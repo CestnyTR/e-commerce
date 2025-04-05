@@ -1,0 +1,33 @@
+#image-preview {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.image-container {
+    position: relative;
+    margin: 5px;
+}
+
+.preview-image {
+    width: 10vh;
+    height: 10vh;
+    object-fit: cover;
+}
+
+.delete-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.image-label {
+    display: block;
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;
+}

@@ -1,0 +1,24 @@
+.faq-section .card-header {
+    border-bottom: none;
+}
+
+.faq-section .btn-link {
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.faq-section .btn-link:hover,
+.faq-section .btn-link:focus {
+    text-decoration: none;
+}
+
+.faq-section .card {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+}
+
+.faq-section .card-body {
+    padding: 1.25rem;
+}
