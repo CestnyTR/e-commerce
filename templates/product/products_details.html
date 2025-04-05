@@ -20,6 +20,7 @@
             src="{{url_for('static',filename='uploads/' + product.owner_id|string + '/' + product.pic_1)}}"
             class="card-img-top main-image"
             alt="Product Image"
+            onerror="this.onerror=null;this.src='/static/images/not_found.png';"
           />
         </div>
         <div class="card-body">

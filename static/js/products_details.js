@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             let imageHtml = '';
             let i = 0;
             images.forEach(imageSrc => {
-                imageHtml += `<div class="col-3"><img src="/static/${imageSrc}" class="img-thumbnail" alt="Thumbnail ${i++}"/></div>`;
+                imageHtml += `<div class="col-3"><img src="/static/${imageSrc}" class="img-thumbnail" alt="Thumbnail ${i++}" onerror="this.onerror=null;this.src='/static/images/not_found.png';"/></div>`;
             });
             imageContainer.innerHTML = imageHtml;
 
