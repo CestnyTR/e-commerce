@@ -319,8 +319,6 @@ def address_update(address_id):
         address_id = update_address(
             user_info["address_id"], address_title, city_id, district_id, street_id, neighborhood_id, open_address)
 
-        # Kullanıcı bilgilerini güncelle
-        update_user_address(str(address_id)+",", session["id"])
         flash("Güncelleme başarılı", "success")
         return redirect(url_for("profiles.user_address"))
     else:

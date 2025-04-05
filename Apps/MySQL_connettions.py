@@ -116,7 +116,7 @@ def update_user_address(address_id, id):
     user_query = "SELECT address_id FROM users WHERE id = %s"
     cursor.execute(user_query, (id,))
     user_addres_list = cursor.fetchone()
-    user_addres_list = user_addres_list["address_id"]+str(address_id)+","
+    user_addres_list = user_addres_list["address_id"]+","+str(address_id)
     query = """
                             UPDATE users
                             SET address_id=%s
@@ -193,24 +193,24 @@ def delete_address(address_id, id):
     cursor = mysql.connection.cursor()
     user_query = "SELECT address_id FROM users WHERE id = %s"
     cursor.execute(user_query, (id,))
-    user_addres_list = cursor.fetchone()
-    address_ids = user_addres_list["address_id"]
-    address_lists = ""
-    address_id_lists = address_ids.split(",")
-    for address_id_list in address_id_lists:
-        if address_id_list != str(address_id) and address_id_list:
-            address_lists = address_lists+str(address_id_list)+","
-    query = "UPDATE users SET address_id=%s  WHERE id=%s"
-    cursor.execute(query, (address_lists, id))
-    mysql.connection.commit()
-    query = "DELETE FROM address WHERE id=%s"
-    cursor.execute(query, (address_id,))
-    mysql.connection.commit()
+    user_address_list = cursor.fetchone()
+    if user_address_list and user_address_list["address_id"]:
+        address_ids = user_address_list["address_id"].split(",")
+        updated_address_ids = [
+            addr_id for addr_id in address_ids if addr_id != str(address_id) and addr_id]
+        updated_address_string = ",".join(updated_address_ids)
+
+        query = "UPDATE users SET address_id=%s WHERE id=%s"
+        cursor.execute(query, (updated_address_string, id))
+        mysql.connection.commit()
+
+        query = "DELETE FROM address WHERE id=%s"
+        cursor.execute(query, (address_id,))
+        mysql.connection.commit()
     cursor.close()
 # READ
 
-
-def get_products(category_title=None):
+def get_products(category_title=None, min_price=10, max_price=1000000, color=None):
     cursor = mysql.connection.cursor()
     query = """
         SELECT
@@ -235,11 +235,20 @@ def get_products(category_title=None):
             category c ON p.category_id = c.id
         LEFT JOIN
             colors cl ON p.color_id = cl.id
+        WHERE
+            p.price BETWEEN %s AND %s
     """
-    params = []
+    params = [min_price, max_price]
+
     if category_title:
-        query += " WHERE c.title = %s"
-        params.append(category_title)
+        # Dynamically create the placeholders for each category in the list
+        placeholders = ', '.join(['%s'] * len(category_title))
+        query += f" AND c.title IN ({placeholders})"
+        params.extend(category_title)  # Add the list of categories to the params
+
+    if color:
+        query += " AND cl.title = %s"
+        params.append(color)
 
     cursor.execute(query, params)
     return cursor.fetchall()

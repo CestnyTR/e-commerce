@@ -1,67 +1,148 @@
-{% extends 'body.html' %}
+{% extends 'body.html' %} 
 {% block stylesheets %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/purchase.css') }}" />
-{% endblock %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/purchase.css') }}"
+/>
+
+
+{% endblock %} 
 
 {% block content %}
-  <center>
-    <h1>shopping carts</h1>
-  </center>
+<div class="steps-horizontal">
+  {% for step in [1, 2, 3, 4] %}
+  <div
+    class="step-horizontal {% if step == 1 %}active{% endif %}"
+    data-step="{{ step }}"
+  >
+    <div class="step-icon">
+      {% if step == 1 %}<i class="fas fa-check"></i>{% elif step == 2 %}
+      <i class="fas fa-user"></i>{% elif step == 3 %}
+      <i class="fas fa-credit-card"></i>{% else %} <i class="fas fa-flag"></i>{%
+      endif %}
+    </div>
+    <div class="step-title">Adım {{ step }}</div>
+    <div class="step-description">
+      {% if step == 1 %}Ürünler{% elif step == 2 %}Adresler{% elif step == 3
+      %}Ödeme{% else %}Onay{% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
 
-  <h1>{{ user }}</h1>
-  <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse1" style="text-decoration:none; color: grey;">Adresleriniz</a></h4>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse in">
-        <div class="panel-body">
-          <div class="address-list-container">
-            {% for address_list in address_lists %}
-              <div class="address-item">
-                <div class="address-title">Adres: {{ address_list.title }}</div>
-                <div class="address-name">{{ address_list.name }}</div>
-                <div class="address-open">Açık Adres: {{ address_list.open_address }}</div>
-              </div>
-            {% endfor %}
+<!-- ADIM İÇERİKLERİ -->
+<div class="step-contents mt-4">
+  <div class="step-content" data-step="1">
+    <!-- Sepet Ürünleri Tablosu (senin eski içeriğin buraya taşındı) -->
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="headingTwo">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseProducts" aria-expanded="false" aria-controls="collapseProducts">
+          <i class="bi bi-cart-fill me-2"></i> Sepetteki Ürünler
+        </button>
+      </h2>
+      <div id="collapseProducts" class="accordion-collapse collapse show" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover align-middle">
+              <thead class="table-light">
+                <tr>
+                  <th>Ürün</th>
+                  <th>Adet</th>
+                  <th>Toplam</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for shopping_cart in shopping_carts %}
+                  <tr>
+                    <td>{{ shopping_cart.title }}</td>
+                    <td>{{ shopping_cart.quantity }}</td>
+                    <td>{{ shopping_cart.item_total }}₺</td>
+                  </tr>
+                {% endfor %}
+                <tr class="table-secondary fw-bold">
+                  <td colspan="2" class="text-end">Toplam Tutar</td>
+                  <td>{{ total_price }}₺</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
-      <div class="panel-heading">
-        <h4 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapse2" style="text-decoration:none; color: grey;">Ürünleriniz</a></h4>
-      </div>
-      <div id="collapse2" class="panel-collapse collapse in">
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr>
-                <th scope="col">Ürün</th>
-                <th scope="col">Adet</th>
-                <th scope="col">Fiyat</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for shopping_cart in shopping_carts %}
-                <tr>
-                  <td>{{ shopping_cart.title }}</td>
-                  <td>{{ shopping_cart.quantity }}</td>
-                  <td>{{ shopping_cart.item_total }}₺</td>
-                </tr>
-              {% endfor %}
-            </tbody>
-            <tr>
-              <td colspan="2" >Fiyat</td>
-              <td>{{ total_price }}₺</td>
-            </tr>
-          </table>
-        </div>
-        <div class="panel-body"></div>
-      </div>
     </div>
   </div>
-  <a href="/payment" class="btn btn-info" role="button">Ödeme ekranına geç</a>
-{% endblock %}
-
-{% block scripts %}
-  <script src="{{ url_for('static', filename='js/purchase.js') }}"></script>
+  <div class="step-content" data-step="2" style="display: none">
+    <!-- Adres Kartları -->
+    {% for address_list in address_lists %}
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="form-check">
+            <input
+              class="form-check-input address-radio"
+              type="radio"
+              name="selected_address"
+              id="address_{{ loop.index }}"
+              value="{{ address_list.title }} - {{ address_list.name }} - {{ address_list.open_address }}"
+            />
+            <label class="form-check-label" for="address_{{ loop.index }}">
+              <strong>{{ address_list.title }}</strong><br />
+              {{ address_list.name }}<br />
+              {{ address_list.open_address }}
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="step-content" data-step="3" style="display: none">
+    <p>Ödeme ekranı gelecek...</p>
+  </div>
+  <div class="step-content" data-step="4" style="display: none">
+    <h4 class="mb-3">Seçilen Adres</h4>
+    <div id="selected-address-summary" class="alert alert-info"></div>
+  
+    <hr />
+  
+    <h4 class="mb-3">Sepet Özeti</h4>
+    <div class="table-responsive mb-4">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-light">
+          <tr>
+            <th>Ürün</th>
+            <th>Adet</th>
+            <th>Toplam</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for shopping_cart in shopping_carts %}
+          <tr>
+            <td>{{ shopping_cart.title }}</td>
+            <td>{{ shopping_cart.quantity }}</td>
+            <td>{{ shopping_cart.item_total }}₺</td>
+          </tr>
+          {% endfor %}
+          <tr class="table-secondary fw-bold">
+            <td colspan="2" class="text-end">Toplam Tutar</td>
+            <td>{{ total_price }}₺</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div class="text-center">
+      <a href="/payment" class="btn btn-success btn-lg">
+        <i class="bi bi-credit-card-2-front-fill me-2"></i> Ödeme Ekranına Geç
+      </a>
+    </div>
+  </div>
+  
+</div>
+<div class="controls text-center">
+  <button class="btn" id="prevBtn">Previous</button>
+  <button class="btn" id="nextBtn">Next</button>
+</div>
+</div>
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/purchase.js') }}"></script>
 {% endblock %}

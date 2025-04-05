@@ -10,8 +10,12 @@ prodcuts_bp = Blueprint("prodcuts", __name__)
 
 @prodcuts_bp.route("/product/products")
 def products():
-    category_title = request.args.get('category')  # Get category from query parameters
-    products = get_products(category_title)
+    category_title = request.args.getlist('category')  # List of categories
+    min_price = request.args.get('min_price', 10, type=int)  # Default to 10
+    max_price = request.args.get('max_price', 1000000, type=int)  # Default to 1000000
+    color = request.args.get('color')  # Single color filter
+    
+    products = get_products(category_title=category_title, min_price=min_price, max_price=max_price, color=color)
     return render_template("/product/products.html", products=products)
 
 

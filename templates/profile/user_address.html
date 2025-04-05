@@ -1,37 +1,33 @@
 {% extends 'body.html' %}
 
-{% block content %}
-  <center>
-    <h1>{{ session.username }} Sistemde kayıtlı adresleriniz.</h1>
-  </center>
-  <table class="table table-striped table-light">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">adres adı Adı</th>
-        <th scope="col">adress</th>
-        <th scope="col">Açık adress</th>
-        <th scope="col">Güncelle</th>
-        <th scope="col">sil</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for address_list in address_lists %}
-        <tr>
-          <th scope="row">{{ address_list.id }}</th>
-          <td>{{ address_list.title }}</td>
-          <td>{{ address_list.name }}</td>
-          <td>{{ address_list.open_address }}</td>
-          <td>
-            <a href="/address_update/{{ address_list.id }}" class="btn btn-info" role="button">Güncelle</a>
-          </td>
-          <td>
-            <a href="/address_delete/{{ address_list.id }}" class="btn btn-warning" role="button">Sil</a>
-          </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+{% block stylesheets %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/address_list.css') }}">
+{% endblock %}
 
-  <a href="/profile/address_add" class="btn btn-info" role="button">Adres Ekle</a>
+{% block content %}
+  <div class="container mt-5">
+    <h2 class="text-center mb-4">{{ session.username }} sisteme kayıtlı adresleriniz</h2>
+
+    <div class="d-flex justify-content-end mb-3">
+      <a href="/profile/address_add" class="btn btn-success">+ Yeni Adres Ekle</a>
+    </div>
+
+    <div class="address-list-container row">
+      {% for address_list in address_lists %}
+        <div class="col-md-6 col-lg-4 mb-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Adres Başlığı: {{ address_list.title }}</h5>
+              <p class="card-text"><strong>Ad Soyad:</strong> {{ address_list.name }}</p>
+              <p class="card-text"><strong>Açık Adres:</strong> {{ address_list.open_address }}</p>
+              <div class="d-flex justify-content-between mt-3">
+                <a href="/address_update/{{ address_list.id }}" class="btn btn-primary btn-sm">Güncelle</a>
+                <a href="/address_delete/{{ address_list.id }}" class="btn btn-danger btn-sm">Sil</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}

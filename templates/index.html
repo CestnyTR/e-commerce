@@ -1,5 +1,75 @@
-{% extends 'body.html' %}
+{% extends 'body.html' %} 
 {% block content %}
-  <h1>ANA SAYFA</h1>
-  <p>Merhaba e-ticaret örnek siteme hoş geldiniz burada gösterilen hiç bir ürün satılık değildir, sadece göstermeliktir.Sitemi incelediğiniz için teşekkür ederim.</p>
+<div class="container mt-5">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="hero-title display-4">CestnTR Teknoloji'ye hoş geldiniz</h1>
+        <p class="hero-description lead">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam commodo urna magna, vel faucibus tellus mattis vitae.
+        </p>
+        <a href="/product/products" class="btn btn-primary btn-lg">Tüm ürünlerimiz için </a>
+      </div>
+      <div class="col-lg-6">
+        <img
+          src="https://images.unsplash.com/photo-1609334761848-77b4d1994040?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt="Hero Image"
+          class="img-fluid rounded shadow"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Cards Section -->
+  <div class="row mt-4">
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm">
+        <img
+          src="https://images.unsplash.com/photo-1560209617-059c0bd661ba?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          class="card-img-top"
+          alt="Telefon"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Telefon</h5>
+          <p class="card-text">En yeni Telefon ürünleri keşfedin.</p>
+          <a href="/product/products?category=Telefon" class="btn btn-outline-primary btn-sm">Göz At</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm">
+        <img
+          src="https://images.unsplash.com/photo-1585792180666-f7347c490ee2?q=80&w=2077&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          class="card-img-top"
+          alt="Monitör"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Monitör</h5>
+          <p class="card-text">En yeni Monitör ürünleri keşfedin.</p>
+          <a href="/product/products?category=Monitör" class="btn btn-outline-primary btn-sm">Göz At</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm">
+        <img
+          src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          class="card-img-top"
+          alt="Laptop"
+        />
+        <div class="card-body">
+          <h5 class="card-title">Laptop</h5>
+          <p class="card-text">En yeni Laptop ürünleri keşfedin.</p>
+          <a href="/product/products?category=Laptop" class="btn btn-outline-primary btn-sm">Göz At</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Information Alert -->
+  <div class="alert alert-info mt-4" role="alert">
+    <strong>Bilgilendirme:</strong> Bu sitede gösterilen hiçbir ürün şu anda satılık değildir. Tüm görseller ve açıklamalar yalnızca örnek amaçlıdır. Anlayışınız için teşekkür ederiz.
+  </div>
+</div>
 {% endblock %}

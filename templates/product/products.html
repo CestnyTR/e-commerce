@@ -1,36 +1,139 @@
 {% extends 'body.html' %}
 
 {% block stylesheets %}
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="{{ url_for('static', filename='css/products.css') }}" />
 {% endblock %}
+
 {% block content %}
   <div class="container py-5">
     <h2 class="text-center mb-4">Our Products</h2>
-    <div class="container mt-5">
-      <div class="row g-4">
-        {% for product in products %}
-        <div class="col-md-4" >
-          <div class="card">
-                <a href="products/{{ product.id }}" class="product_link">
-                <img src="/static/uploads/{{ product.owner_id }}/{{ product.pic_1 }}" class="card-img-top" alt="Product Image" onerror="this.onerror=null;this.src='/static/uploads/not_found.png';"/>
-                <div class="card-body">
-                  <h5 class="card-title">{{ product.title }}</h5>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <span class="h5 mb-0">{{ product.price }}</span>
-                  </div>
+
+    <div class="row">
+      <!-- Filters Sidebar -->
+      <div class="col-lg-3 col-md-4">
+        <div class="filter-sidebar p-4 shadow-sm">
+          <form id="filter-form" method="get" action="{{ url_for('prodcuts.products') }}">
+            <div class="filter-group">
+              <h6 class="mb-3">Categories</h6>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="category" value="Monitör" id="Monitör">
+                <label class="form-check-label" for="Monitör">Monitör</label>
+              </div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="category" value="Telefon" id="Telefon">
+                <label class="form-check-label" for="Telefon">Telefon</label>
+              </div>
+              <div class="form-check mb-2">
+                <input class="form-check-input" type="checkbox" name="category" value="Laptop" id="Laptop">
+                <label class="form-check-label" for="Laptop">Laptop</label>
+              </div>
+            </div>
+            <div class="filter-group">
+              <h6 class="mb-3">Fiyat Aralığı</h6>
+            
+              <div class="d-flex justify-content-between">
+                <input type="number" class="form-control" id="minPrice" name="min_price" value="{{ request.args.get('min_price', 10) }}" min="10" max="1000000" style="width: 48%;" onchange="updateRange()">
+                <input type="number" class="form-control" id="maxPrice" name="max_price" value="{{ request.args.get('max_price', 1000000) }}" min="10" max="1000000" style="width: 48%;" onchange="updateRange()">
+              </div>
+              
+              <div class="d-flex justify-content-between">
+                <span class="text-muted">10₺</span>
+                <span class="text-muted">1.000.000₺</span>
+              </div>
+            </div>
+            
+
+            <div class="filter-group">
+              <h6 class="mb-3">Renkler</h6>
+              <div class="row">
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Kırmızı" id="colorRed" class="form-check-input">
+                  <label for="colorRed" class="color-option" style="background-color: #dc2626;"></label>
+                  <span class="color-name">Kırmızı</span>
                 </div>
-              </a>
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Mavi" id="colorBlue" class="form-check-input">
+                  <label for="colorBlue" class="color-option" style="background-color: #2563eb;"></label>
+                  <span class="color-name">Mavi</span>
+                </div>
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Yeşil" id="colorGreen" class="form-check-input">
+                  <label for="colorGreen" class="color-option" style="background-color: #16a34a;"></label>
+                  <span class="color-name">Yeşil</span>
+                </div>
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Sarı" id="colorYellow" class="form-check-input">
+                  <label for="colorYellow" class="color-option" style="background-color: #facc15;"></label>
+                  <span class="color-name">Sarı</span>
+                </div>
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Mor" id="colorPurple" class="form-check-input">
+                  <label for="colorPurple" class="color-option" style="background-color: #8b5cf6;"></label>
+                  <span class="color-name">Mor</span>
+                </div>
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Siyah" id="colorBlack" class="form-check-input">
+                  <label for="colorBlack" class="color-option" style="background-color: #000000;"></label>
+                  <span class="color-name">Siyah</span>
+                </div>
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Beyaz" id="colorWhite" class="form-check-input">
+                  <label for="colorWhite" class="color-option" style="background-color: #ffffff;"></label>
+                  <span class="color-name">Beyaz</span>
+                </div>
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Turuncu" id="colorOrange" class="form-check-input">
+                  <label for="colorOrange" class="color-option" style="background-color: #fb923c;"></label>
+                  <span class="color-name">Turuncu</span>
+                </div>
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Pembe" id="colorPink" class="form-check-input">
+                  <label for="colorPink" class="color-option" style="background-color: #ec4899;"></label>
+                  <span class="color-name">Pembe</span>
+                </div>
+                <div class="col-4 mb-2">
+                  <input type="radio" name="color" value="Gri" id="colorGray" class="form-check-input">
+                  <label for="colorGray" class="color-option" style="background-color: #6b7280;"></label>
+                  <span class="color-name">Gri</span>
+                </div>
+              </div>
+            </div>
+            
+            
+
+
+            <button type="submit" class="btn btn-outline-primary w-100">Filtreleri Uygula</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="col-lg-9 col-md-8">
+        <div class="row g-4">
+          {% for product in products %}
+            <div class="col-md-4">
+              <div class="card">
+                <a href="products/{{ product.id }}" class="product_link">
+                  <img src="/static/uploads/{{ product.owner_id }}/{{ product.pic_1 }}" class="card-img-top" alt="Product Image" onerror="this.onerror=null;this.src='/static/uploads/not_found.png';"/>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <span class="h5 mb-0">{{ product.price }} ₺</span>
+                    </div>
+                  </div>
+                </a>
                 <div class="card-footer d-flex justify-content-between bg-light">
                   <a href="#" onclick="addToCart('{{ product.id }}')" class="btn btn-primary btn-sm add-to-cart" data-id="{{ product.id }}" role="button">Sepete Ekle</a>
                 </div>
               </div>
             </div>
-        {% endfor %}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
 {% endblock %}
+
 {% block scripts %}
   <script src="{{ url_for('static', filename='js/add_to_cart.js') }}"></script>
 {% endblock %}

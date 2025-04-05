@@ -1,83 +1,69 @@
-.address-list-container {
+
+
+.steps-horizontal {
     display: flex;
-    /* Flexbox kullanarak yan yana sıralama */
-    flex-wrap: wrap;
-    /* Gerekirse alt satıra geç */
-    padding: 10px;
-    font-family: sans-serif;
-}
-
-.address-item {
-    border: 1px solid #eee;
-    margin: 5px;
-    /* Öğeler arasında boşluk bırak */
-    padding: 5px;
-    cursor: pointer;
-    width: 200px;
-    /* veya istediğiniz genişlik */
-}
-
-.address-item:hover {
-    background-color: #f0f0f0;
-}
-
-.address-item.selected {
-    background-color: #e0e0e0;
-}
-
-
-
-.table-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    width: 80%;
-    /* veya istediğiniz genişlik */
+    justify-content: space-between;
+    align-items: flex-start;
     max-width: 800px;
+    position: relative;
+    padding: 0;
 }
 
-.table-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    /* Daha hafif gölge */
-    width: 90%;
-    /* Daha küçük genişlik */
-    max-width: 500px;
-    /* Maksimum genişlik */
+.steps-horizontal::before {
+    content: '';
+    position: absolute;
+    top: 24px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #e9ecef;
+    z-index: 1;
 }
 
-table {
-    font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', 'sans-serif';
-
-    width: 100%;
-    border-collapse: collapse;
+.step-horizontal {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
-th,
-td {
-    padding: 12px 15px;
-    /* Daha küçük dolgu */
-    text-align: left;
-    border-bottom: 1px solid #eee;
+.step-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px;
+    font-size: 20px;
+    color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.step-title {
     font-size: 14px;
-    /* Daha küçük yazı boyutu */
+    color: #6c757d;
+    margin-bottom: 5px;
 }
 
-th {
-    background-color: #f0f0f0;
-    /* Açık gri başlık arka planı */
-    color: #333;
-    font-weight: 600;
+.step-description {
+    font-size: 12px;
+    color: #adb5bd;
+    max-width: 150px;
+    margin: 0 auto;
 }
 
-tr:hover {
-    background-color: #f5f5f5;
-    /* Daha hafif hover efekti */
+.step-horizontal.active .step-icon {
+    background: #4361ee;
+    border-color: #4361ee;
+    color: white;
+    box-shadow: 0 0 0 5px rgba(67, 97, 238, 0.2);
 }
 
-td:last-child {
-    font-weight: 600;
-    color: #333;
+.step-horizontal.complete .step-icon {
+    background: #2ecc71;
+    border-color: #2ecc71;
+    color: white;
 }
