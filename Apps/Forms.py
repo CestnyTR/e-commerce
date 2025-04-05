@@ -1,7 +1,6 @@
 import wtforms
 #! user class
 
-
 class RegisterForm(wtforms.Form):
     name = wtforms.StringField("İsim", validators=[
         wtforms.validators.DataRequired(),

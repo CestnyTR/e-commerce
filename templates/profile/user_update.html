@@ -1,34 +1,92 @@
-{% extends 'body.html' %}
-{% block content %}
-  <div style="display: flex; justify-content: center; align-items: center; height: 100vh; flex-direction: column;">
-    <h1>Kullanıcı bilgilerini güncelle</h1>
-    {% from 'includes/_formhelpers.html' import render_field %}
+{% extends 'body.html' %} {% block stylesheets %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/form.css') }}"
+/>
+{% endblock %} {% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-md-12 col-sm-12">
+      <div class="card shadow-lg">
+        <div class="card-body">
+          <h3 class="card-title text-center mb-4">
+            Kullanıcı Bilgilerini Güncelle
+          </h3>
+          {% from 'includes/_formhelpers.html' import render_field %}
 
-    <form method="post" style="width: 100%; max-width: 400px; margin: 0 auto;">
-      <dl style="width: 100%; display: block;">
-        {{ render_field(form.name) }}
-        {{ render_field(form.surname) }}
-        {{ render_field(form.username) }}
-        {{ render_field(form.email) }}
-        {{ render_field(form.old_password) }}
-        <!-- Yeni Şifre ve Onay (Başlangıçta gizli) -->
-        <div id="new-password-container" style="display: none;">{{ render_field(form.password) }}
-          {{ render_field(form.confirm) }}</div>
-        {{ render_field(form.address_title) }}
-        {{ render_field(form.city) }}
-        {{ render_field(form.district) }}
-        {{ render_field(form.street) }}
-        {{ render_field(form.neighborhood) }}
-        {{ render_field(form.address) }}
-      </dl>
-      <p>
-        <button type="submit" class="btn btn-primary">Bilgileri güncelle</button>
-      </p>
-    </form>
+          <form
+            method="post"
+            style="width: 100%; max-width: 500px; margin: 0 auto"
+          >
+            <!-- Personal Information -->
+            <div class="mb-3">
+              {{ render_field(form.name, class="form-control",
+              placeholder="Adınızı girin") }}
+            </div>
+            <div class="mb-3">
+              {{ render_field(form.surname, class="form-control",
+              placeholder="Soyadınızı girin") }}
+            </div>
+            <div class="mb-3">
+              {{ render_field(form.username, class="form-control",
+              placeholder="Kullanıcı adınızı girin") }}
+            </div>
+            <div class="mb-3">
+              {{ render_field(form.email, class="form-control",
+              placeholder="E-posta adresinizi girin") }}
+            </div>
+            <div class="mb-3">
+              {{ render_field(form.old_password, class="form-control",
+              placeholder="Mevcut şifrenizi girin") }}
+            </div>
+
+            <!-- New Password Section (Initially hidden) -->
+            <div id="new-password-container" style="display: none">
+              {{ render_field(form.password, class="form-control",
+              placeholder="Yeni şifrenizi girin") }} {{
+              render_field(form.confirm, class="form-control", 
+              placeholder="Yeni şifrenizi tekrar girin") }}
+            </div>
+
+            <!-- Address Information -->
+            <div class="mb-3">
+              {{ render_field(form.address_title, class="form-control",
+              placeholder="Adres başlığını girin") }}
+            </div>
+            <div class="mb-3">
+              {{ render_field(form.city, class="form-control",
+              placeholder="Şehir girin") }}
+            </div>
+            <div class="mb-3">
+              {{ render_field(form.district, class="form-control",
+              placeholder="İlçe girin") }}
+            </div>
+            <div class="mb-3">
+              {{ render_field(form.street, class="form-control",
+              placeholder="Caddeyi girin") }}
+            </div>
+            <div class="mb-3">
+              {{ render_field(form.neighborhood, class="form-control",
+              placeholder="Mahalleyi girin") }}
+            </div>
+            <div class="mb-3">
+              {{ render_field(form.address, class="form-control",
+              placeholder="Adresinizi girin") }}
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-lg">
+                Bilgileri Güncelle
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
-{% endblock %}
-{% block scripts %}
-  <script src="{{ url_for('static', filename='js/user_update.js') }}"></script>
-
-  <script src="{{ url_for('static', filename='js/address.js') }}"></script>
+</div>
+{% endblock %} {% block scripts %}
+<script src="{{ url_for('static', filename='js/user_update.js') }}"></script>
+<script src="{{ url_for('static', filename='js/address.js') }}"></script>
 {% endblock %}
